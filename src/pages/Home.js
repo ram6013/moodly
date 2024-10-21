@@ -16,7 +16,7 @@ function Home() {
       </p>
       <img
         src="class.png"
-        className="aspect-square w-[30%] mx-auto"
+        className="aspect-square w-[25%] mx-auto"
         alt="Class"
       />
     </div>
