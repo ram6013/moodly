@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../Componentes/Header";
+import Footer from "../Componentes/Footer";
 import { useLanguage } from "../LanguageContext";
 function Home() {
   const { isLanguageSpanish } = useLanguage();
@@ -15,10 +16,13 @@ function Home() {
       </p>
       <img
         src="class.png"
-        className="aspect-square w-[20%] mx-auto"
+        className="aspect-square w-[15%] mx-auto"
         alt="Class"
       />
-      <button className="bg-white p-5 mt-10 w-[30%] rounded-full shadow-lg font-mochiy hover:bg-gray-300">{isLanguageSpanish? "Pruebala!" : "Try it!"}</button>
+      <button className="bg-white p-5 mt-10 w-[30%] rounded-full shadow-lg font-mochiy hover:bg-gray-300">{isLanguageSpanish? "Pruebalo!" : "Try it!"}</button>
+      <div className=" w-full">
+        <Footer></Footer>
+      </div>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../Componentes/Header";
 import { useLanguage } from "../LanguageContext";
+import Footer from "../Componentes/Footer";
 
 function Contacto() {
   const { isLanguageSpanish } = useLanguage();
@@ -29,6 +30,9 @@ function Contacto() {
             <button className="bg-white p-5 mt-10 w-[30%] rounded-full shadow-lg font-mochiy hover:bg-gray-300">{isLanguageSpanish? "Enviar" : "Send"}</button>
           </div>
         </div>
+      </div>
+      <div className="w-full">
+      <Footer></Footer>
       </div>
     </div>
   );
