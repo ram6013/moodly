@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useLanguage } from "../LanguageContext";
 import Header from "../Componentes/Header";
 import Footer from "../Componentes/Footer";
 function QuienesSomos(){
@@ -6,6 +7,7 @@ function QuienesSomos(){
     const handleNavigateHome = () => {
       navigate("/"); 
     };
+    const { isLanguageSpanish } = useLanguage();
     return(
     <div className="bg-gradient-to-b from-black to-gray-600 w-auto h-auto p-4 ">
     <Header></Header>
@@ -32,7 +34,7 @@ function QuienesSomos(){
         <div className="text-center mt-20">
             <img src="/pablo.jpg" alt="Pablo" className="w-40 h-40 object-cover rounded-full mb-4 border-2 border-white"/>
             <h2 className="text-white text-xl font-bold">Pablo Lliso</h2>
-            <p className="text-gray-300">Becario</p>
+            <p className="text-gray-300">{isLanguageSpanish? "Becario" : "Intern"}</p>
             <a href="https://www.linkedin.com/in/pablo-lliso-203847315/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">
               LinkedIn
             </a>
@@ -40,7 +42,7 @@ function QuienesSomos(){
         <div className="text-center mt-20">
             <img src="/firas.jpg" alt="Firas" className="w-40 h-40 object-cover rounded-full mb-4 border-2 border-white"/>
             <h2 className="text-white text-xl font-bold">Firas Sabia</h2>
-            <p className="text-gray-300">Programmer</p>
+            <p className="text-gray-300">{isLanguageSpanish? "Programador" : "Coder"}</p>
             <a href="https://www.linkedin.com/in/firas-sabia/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">
               LinkedIn
             </a>
@@ -48,7 +50,7 @@ function QuienesSomos(){
         <div className="text-center mt-20">
             <img src="/ricardo2.jpg" alt="Ricardo" className="w-40 h-40 object-cover rounded-full mb-4 border-2 border-white"/>
             <h2 className="text-white text-xl font-bold">Ricardo Montserrat</h2>
-            <p className="text-gray-300">Programmer</p>
+            <p className="text-gray-300">{isLanguageSpanish? "Programador" : "Coder"}</p>
             <a href="https://www.linkedin.com/in/ricardo-montserrat-solorzano/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">
               LinkedIn
             </a>

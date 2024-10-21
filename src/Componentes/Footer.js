@@ -13,14 +13,14 @@ function Footer() {
     return (
             <footer className="flex flex-row justify-around mt-10">
                 <div className="flex">
-                    <p>&copy; {new Date().getFullYear()} Moodly. All rights reserved.</p>
+                    <p>&copy; {new Date().getFullYear()} {isLanguageSpanish? "Moodly. Todos los derechos reservados." : "Moodly. All rights reserved."}</p>
                 </div>
                 <div className="flex ">
                     <button onClick={() => handleNavigate("")} className="text-gray-400 text-xs ml-2 transition-transform duration-200 hover:scale-110 font-mochiy ">
-                        Privacy Policy
+                        {isLanguageSpanish? "Política de Privacidad" : "Privacy Policy"}
                     </button>
                     <button onClick={() => handleNavigate("")} className="text-gray-400 text-xs ml-2 transition-transform duration-200 hover:scale-110 font-mochiy">
-                        Cookie Policy
+                        {isLanguageSpanish? "Politica de Cookies" : "Cookie Policy"}
                     </button>
                 </div>
             </footer>
