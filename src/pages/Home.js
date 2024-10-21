@@ -4,10 +4,14 @@ import Header from "../Componentes/Header";
 import Footer from "../Componentes/Footer";
 import { useLanguage } from "../LanguageContext";
 function Home() {
+  const navigate = useNavigate();
+  const handleNavigate = (destiny) => {
+    navigate(`/${destiny}`);
+  };
   const { isLanguageSpanish } = useLanguage();
   return (
     <div className="bg-gradient-to-b from-black to-gray-600 h-screen w-full p-4 gap-8 flex flex-col items-center justify-center">
-      <Header className="absolute top-0 w-full"></Header>
+      <Header></Header>
       <h1 className="text-white text-8xl font-mochiy">Moodly</h1>
       <p className="text-white max-w-4xl text-lg">
         {isLanguageSpanish
@@ -19,7 +23,7 @@ function Home() {
         className="aspect-square w-[15%] mx-auto"
         alt="Class"
       />
-      <button className="bg-white p-5 mt-10 w-[30%] rounded-full shadow-lg font-mochiy hover:bg-gray-300">{isLanguageSpanish? "Pruebalo!" : "Try it!"}</button>
+      <button onClick={()=>handleNavigate("IA")} className="bg-white p-5 mt-10 w-[30%] rounded-full shadow-lg font-mochiy hover:bg-gray-300">{isLanguageSpanish? "Pruebalo!" : "Try it!"}</button>
       <div className=" w-full">
         <Footer></Footer>
       </div>

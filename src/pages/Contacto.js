@@ -7,7 +7,7 @@ function Contacto() {
   const { isLanguageSpanish } = useLanguage();
   return (
     <div className="bg-gradient-to-b from-black to-gray-600 h-screen w-auto p-4 gap-8 flex flex-col items-center justify-center relative">
-      <Header className="absolute top-0 w-full"></Header> 
+      <Header></Header> 
       <div className="flex flex-col items-center justify-center h-full w-full">
         <h1 className="text-white text-7xl mt-16 font-mochiy">
           {isLanguageSpanish ? "¡Contáctanos!" : "Contact us!"}

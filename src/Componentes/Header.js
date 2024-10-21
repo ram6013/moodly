@@ -11,6 +11,7 @@ function Header() {
   };
 
   return (
+    <div className='absolute top-0 w-full'>
     <div className="flex justify-between items-center w-full">
       <div className="flex justify-between">
         <button onClick={() => handleNavigate("")} className="text-white text-2xl ml-2 transition-transform duration-200 hover:scale-110 font-mochiy">
@@ -35,6 +36,7 @@ function Header() {
           <img src="eng.png" alt="English" className="h-full w-full object-cover" />
         </button>
       </div>
+    </div>
     </div>
   );
 }

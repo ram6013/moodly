@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import QuienesSomos from './pages/QuienesSomos';
 import { LanguageProvider } from './LanguageContext';
 import Contacto from './pages/Contacto';
+import Ia from './pages/Ia';
 
 function App() {
   return (
@@ -13,7 +14,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/QuienesSomos" element={<QuienesSomos />} />
           <Route path='/Contacto' element={<Contacto/>}/>
-        </Routes>
+          <Route path='/IA' element={<Ia/>}/>
+          </Routes>
       </Router>
     </LanguageProvider>
   );
