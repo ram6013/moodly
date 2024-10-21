@@ -1,17 +1,29 @@
 import React from 'react';
 
-const Footer = () => {
-  return (
-    <footer className="footer">
-      <div className="footer-content">
-        <p>&copy; {new Date().getFullYear()} Your Company Name. All rights reserved.</p>
-        <div className="footer-links">
-          <a href="/privacy-policy" className="footer-link">Privacy Policy</a>
-          <a href="/cookie-policy" className="footer-link">Cookie Policy</a>
-        </div>
-      </div>
-    </footer>
-  );
-};
+function Footer() {
+    const { isLanguageSpanish, toggleLanguageToSpanish, toggleLanguageToEnglish } = useLanguage();
+    const navigate = useNavigate();
 
-export default Footer;
+    const handleNavigate = (destiny) => {
+        navigate(`/${destiny}`);
+    };
+    
+    return (
+        <footer className="footer">
+            <div className="footer-content">
+                <div className="footer-left">
+                    <p>&copy; {new Date().getFullYear()} Moodly. All rights reserved.</p>
+                </div>
+                <div className="footer-links">
+                    <button onClick={() => handleNavigate("")} className="text-white text-2xl ml-2 transition-transform duration-200 hover:scale-110 font-mochiy">
+                        Privacy Policy
+                    </button>
+                    <button onClick={() => handleNavigate("")} className="text-white text-2xl ml-2 transition-transform duration-200 hover:scale-110 font-mochiy">
+                        cookie Policy
+                    </button>
+                </div>
+            </div>
+        </footer>
+    );
+}
+    export default Footer;
