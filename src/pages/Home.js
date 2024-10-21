@@ -5,10 +5,9 @@ import { useLanguage } from "../LanguageContext";
 function Home() {
   const { isLanguageSpanish } = useLanguage();
   return (
-    <div className="bg-gradient-to-b from-black to-gray-600 h-auto w-auto p-4 gap-8 flex flex-col items-center justify-center">
-      <Header></Header>
+    <div className="bg-gradient-to-b from-black to-gray-600 h-screen w-full p-4 gap-8 flex flex-col items-center justify-center">
+      <Header className="absolute top-0 w-full"></Header>
       <h1 className="text-white text-8xl font-mochiy">Moodly</h1>
-
       <p className="text-white max-w-4xl text-lg">
         {isLanguageSpanish
           ? "Moodly es una aplicación impulsada por IA que ayuda a los profesores a interpretar las emociones de niños, especialmente aquellos con dificultades o problemas de aprendizaje, en tiempo real. A través del análisis de expresiones faciales y lenguaje corporal, Moodly detecta emociones como confusión, frustración o alegría, proporcionando a los educadores insights valiosos para ajustar su enseñanza y mejorar la experiencia en el aula."
@@ -16,9 +15,10 @@ function Home() {
       </p>
       <img
         src="class.png"
-        className="aspect-square w-[25%] mx-auto"
+        className="aspect-square w-[20%] mx-auto"
         alt="Class"
       />
+      <button className="bg-white p-5 mt-10 w-[30%] rounded-full shadow-lg font-mochiy hover:bg-gray-300">{isLanguageSpanish? "Pruebala!" : "Try it!"}</button>
     </div>
   );
 }

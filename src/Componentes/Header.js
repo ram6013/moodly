@@ -21,7 +21,7 @@ function Header() {
         <button onClick={() => handleNavigate("QuienesSomos")} className="text-white hover:underline">
           {isLanguageSpanish ? "¿Quiénes somos?" : "Who are we?"}
         </button>
-        <button className="text-white hover:underline">
+        <button onClick={()=> handleNavigate("Contacto")} className="text-white hover:underline">
           {isLanguageSpanish ? "Contacto" : "Contact"}
         </button>
         <button className="bg-green-900 text-white px-4 py-2 rounded hover:bg-green-600">
