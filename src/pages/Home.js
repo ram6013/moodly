@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../Componentes/Header";
+import Footer from "../Componentes/Footer";
 import { useLanguage } from "../LanguageContext";
 function Home() {
   const { isLanguageSpanish } = useLanguage();
@@ -19,6 +20,7 @@ function Home() {
         className="aspect-square w-[25%] mx-auto"
         alt="Class"
       />
+      <Footer></Footer>
     </div>
   );
 }
