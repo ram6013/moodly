@@ -1,13 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Home from './pages/Home';
+import QuienesSomos from './pages/QuienesSomos';
+import { LanguageProvider } from './LanguageContext';
 
 function App() {
   return (
-    <div className="App">
-      <header className="bg-black h-screen w-auto">
-        <h1 className='text-white'>Hola</h1>
-      </header>
-    </div>
+    <LanguageProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/QuienesSomos" element={<QuienesSomos />} />
+        </Routes>
+      </Router>
+    </LanguageProvider>
   );
 }
 
