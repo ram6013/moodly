@@ -1,7 +1,6 @@
-// src/components/Header.js
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useLanguage } from '../LanguageContext'; // Importa el contexto
+import { useLanguage } from '../LanguageContext'; 
 
 function Header() {
   const { isLanguageSpanish, toggleLanguageToSpanish, toggleLanguageToEnglish } = useLanguage();
@@ -28,10 +27,11 @@ function Header() {
         <button className="bg-green-900 text-white px-4 py-2 rounded hover:bg-green-600">
           {isLanguageSpanish ? "Únete" : "Join us"}
         </button>
-        <button onClick={toggleLanguageToSpanish} className="h-10 w-10 rounded-full overflow-hidden flex items-center justify-center border border-gray-300">
-          <img src="esp.jpg" alt="Español" className="h-full w-full object-cover" />
+        
+        <button onClick={toggleLanguageToSpanish} className="h-10 w-10 rounded-full overflow-hidden flex items-center justify-center">
+          <img src="esp.png" alt="Español" className="h-full w-full object-cover" />
         </button>
-        <button onClick={toggleLanguageToEnglish} className="h-10 w-10 rounded-full overflow-hidden flex items-center justify-center border border-gray-300">
+        <button onClick={toggleLanguageToEnglish} className="h-10 w-10 rounded-full overflow-hidden flex items-center justify-center">
           <img src="eng.png" alt="English" className="h-full w-full object-cover" />
         </button>
       </div>
