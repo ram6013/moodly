@@ -3,12 +3,6 @@
 import { useTranslation } from "@/app/i18n/client";
 import Link from "next/link";
 import { Button } from "../ui/button";
-import {
-    Dialog,
-    DialogContent,
-    DialogTitle,
-    DialogTrigger,
-} from "../ui/dialog";
 
 export function LandingPage({ lng }: { lng: string }) {
     const { t } = useTranslation(lng);
@@ -25,16 +19,6 @@ export function LandingPage({ lng }: { lng: string }) {
             <Link href="/ai">
                 <Button>{t("tryIt")}</Button>
             </Link>
-
-            <Dialog open={true}>
-                <DialogTrigger>
-                    <Button>POpup</Button>
-                </DialogTrigger>
-
-                <DialogContent>
-                    <DialogTitle>Dar permisos </DialogTitle>
-                </DialogContent>
-            </Dialog>
         </div>
     );
 }

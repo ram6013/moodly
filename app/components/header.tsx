@@ -25,7 +25,10 @@ export async function Header({ lng }: { lng: string }) {
             <div className="flex items-center justify-end space-x-2 md:mr-16">
                 <Button variant={"ghost"}>About</Button>
 
-                <Button variant={"ghost"}>Contact</Button>
+                <Link href={"/contact"}>
+                    <Button variant={"ghost"}>Contact</Button>
+                </Link>
+
                 <SignInButton user={session?.user} lng={lng}></SignInButton>
             </div>
         </header>

@@ -51,16 +51,6 @@ export const DefaultColors: MenuColors = {
     text: "#ffffff",
 };
 
-export function sendMessageToTelegram(text: string, userId: string) {
-    fetch(process.env.NEXT_PUBLIC_API_URL + "/send", {
-        method: "POST",
-        body: JSON.stringify({ message: text, userId }),
-        headers: {
-            Authorization: process.env.FRONEND_SIGN,
-            "Content-Type": "application/json",
-        },
-    });
-}
 export function darkenColor(color: string, percent: number): string {
     // Helper function to convert hex to RGB
     function hexToRgb(hex: string) {

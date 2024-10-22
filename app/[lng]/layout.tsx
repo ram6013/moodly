@@ -6,7 +6,6 @@ import { Providers } from "../components/providers";
 import { cn } from "../lib/utils";
 import "./global.css";
 
-import { Analytics } from "@vercel/analytics/react";
 import { Header } from "../components/header";
 
 export function generateMetadata({
@@ -64,33 +63,12 @@ export default async function RootLayout({
         <html lang="en" suppressHydrationWarning>
             <head></head>
             <body className={cn("font-english font-english-bold font-hebrew")}>
-                <svg height="0px" width="0px">
-                    <defs>
-                        <linearGradient
-                            id="pink-gradient"
-                            x1="0%"
-                            x2="100%"
-                            y1="0%"
-                            y2="100%"
-                        >
-                            <stop
-                                offset="0%"
-                                stopColor="rgba(156, 81, 161, 1)"
-                            />
-                            <stop
-                                offset="70%"
-                                stopColor="rgba(255, 30, 86, 1)"
-                            />
-                        </linearGradient>
-                    </defs>
-                </svg>
                 <Toaster />
                 <Providers attribute="class" defaultTheme="dark" enableSystem>
                     <Header lng={lng}></Header>
                     <main>{children}</main>
                 </Providers>
                 <SpeedInsights />
-                <Analytics />
             </body>
         </html>
     );
