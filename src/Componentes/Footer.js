@@ -11,7 +11,7 @@ function Footer() {
     };
     
     return (
-            <footer className="flex flex-row justify-around mt-10">
+            <footer className="absolute bottom-0 left-0 w-full text-center flex flex-row justify-around mt-10">
                 <div className="flex">
                     <p>&copy; {new Date().getFullYear()} {isLanguageSpanish? "Moodly. Todos los derechos reservados." : "Moodly. All rights reserved."}</p>
                 </div>
