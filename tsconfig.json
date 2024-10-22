@@ -35,7 +35,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "app/components/camera-component.jsx"  ],
   "exclude": [
     "node_modules"
   ]

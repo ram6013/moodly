@@ -1,7 +1,8 @@
 import { ISession } from "@/@types/types";
 import { auth } from "@/auth";
+import CameraComponent from "../../components/camera-component";
 
-export default async function Contact({
+export default async function Ai({
     params: { lng },
 }: {
     params: {
@@ -9,5 +10,9 @@ export default async function Contact({
     };
 }) {
     const session = (await auth()) as ISession;
-    return <></>;
+    return (
+        <div>
+            <CameraComponent></CameraComponent>
+        </div>
+    );
 }
