@@ -51,7 +51,7 @@ const CameraComponent = () => {
                 }
 
                 const resizedDetections = faceapi.resizeResults(detections, displaySize);
-                canvasRef.current.getContext("2d").clearRect(0, 0, WIDTH, HEIGHT);
+                canvasRef.current.getContext("2d").clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
 
                 faceapi.draw.drawDetections(canvasRef.current, resizedDetections);
                 faceapi.draw.drawFaceLandmarks(canvasRef.current, resizedDetections);
