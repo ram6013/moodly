@@ -1,0 +1,308 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --background: 0 0% 100%;
+        --foreground: 0 0% 3.9%;
+
+        --muted: 0 0% 96.1%;
+        --muted-foreground: 0 0% 45.1%;
+
+        --popover: 0 0% 100%;
+        --popover-foreground: 0 0% 3.9%;
+
+        --card: 0 0% 100%;
+        --card-foreground: 0 0% 3.9%;
+
+        --border: 0 0% 89.8%;
+        --input: 0 0% 89.8%;
+
+        --primary: 0 0% 9%;
+        --primary-foreground: 0 0% 98%;
+
+        --secondary: 0 0% 96.1%;
+        --secondary-foreground: 0 0% 9%;
+
+        --accent: 0 0% 96.1%;
+        --accent-foreground: 0 0% 9%;
+
+        --destructive: 0 84.2% 60.2%;
+        --destructive-foreground: 0 0% 98%;
+
+        --ring: 0 0% 3.9%;
+
+        --radius: 0.5rem;
+
+        --chart-1: 12 76% 61%;
+
+        --chart-2: 173 58% 39%;
+
+        --chart-3: 197 37% 24%;
+
+        --chart-4: 43 74% 66%;
+
+        --chart-5: 27 87% 67%;
+    }
+
+    .dark {
+        --background: 0 0% 3.9%;
+        --foreground: 0 0% 98%;
+
+        --muted: 0 0% 14.9%;
+        --muted-foreground: 0 0% 63.9%;
+
+        --popover: 0 0% 3.9%;
+        --popover-foreground: 0 0% 98%;
+
+        --card: 0 0% 3.9%;
+        --card-foreground: 0 0% 98%;
+
+        --border: 0 0% 14.9%;
+        --input: 0 0% 14.9%;
+
+        --primary: 0 0% 98%;
+        --primary-foreground: 0 0% 9%;
+
+        --secondary: 0 0% 14.9%;
+        --secondary-foreground: 0 0% 98%;
+
+        --accent: 0 0% 14.9%;
+        --accent-foreground: 0 0% 98%;
+
+        --destructive: 0 62.8% 30.6%;
+        --destructive-foreground: 0 0% 98%;
+
+        --ring: 0 0% 83.1%;
+
+        --chart-1: 220 70% 50%;
+
+        --chart-2: 160 60% 45%;
+
+        --chart-3: 30 80% 55%;
+
+        --chart-4: 280 65% 60%;
+
+        --chart-5: 340 75% 55%;
+    }
+
+    @font-face {
+        font-family: "english";
+        src: url("/fonts/Cardo-Regular.ttf") format("truetype");
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: "english-bold";
+        src: url("/fonts/Cardo-Bold.ttf") format("truetype");
+        font-weight: normal;
+        font-style: normal;
+    }
+    @font-face {
+        font-family: "english-italic";
+        src: url("/fonts/Cardo-Italic.ttf") format("truetype");
+        font-weight: normal;
+        font-style: normal;
+    }
+    @font-face {
+        font-family: "hebrew";
+        src: url("/fonts/SecularOne-Regular.ttf") format("truetype");
+        font-weight: normal;
+        font-style: normal;
+    }
+}
+
+.path-animation {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: draw 4s forwards;
+    animation-iteration-count: 1;
+}
+
+@keyframes draw {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.expandable-div {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out;
+}
+
+.diagonal-cut {
+    position: relative;
+    overflow: hidden;
+}
+
+.diagonal-cut::before {
+    content: "";
+    position: absolute;
+    bottom: -80%;
+    left: 0;
+    width: 250%;
+    height: 100%;
+    background: white;
+    transform: skewY(15deg);
+    transform-origin: bottom left;
+}
+
+.diagonal-cut::after {
+    content: "";
+    position: absolute;
+    bottom: -80%;
+    right: 0;
+    width: 250%;
+    height: 100%;
+    background: white;
+    transform: skewY(-15deg);
+    transform-origin: bottom right;
+}
+
+.arrows {
+    width: 60px;
+    height: 72px;
+}
+
+.arrows path {
+    fill: transparent;
+    stroke-width: 6px;
+    animation: arrow 2s infinite;
+    -webkit-animation: arrow 2s infinite;
+}
+
+@keyframes arrow {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes arrow /*Safari and Chrome*/ {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.arrows path.a1 {
+    animation-delay: -1s;
+    -webkit-animation-delay: -1s; /* Safari 和 Chrome */
+}
+
+.arrows path.a2 {
+    animation-delay: 0s;
+    -webkit-animation-delay: 0s; /* Safari 和 Chrome */
+}
+
+.expandable-div.expanded {
+    max-height: 1000px; /* This value should be larger than the height of the content */
+}
+@media (max-width: 600px) {
+    .chart-container {
+        min-width: 300px;
+    }
+}
+@media (max-width: 600px) {
+    .date-picker-container {
+        flex-direction: column-reverse;
+    }
+}
+@layer components {
+    .gradient-text {
+        @apply bg-gradient-to-t from-orange-500 to-yellow-500;
+        background-clip: text;
+        color: rgba(0, 0, 0, 0);
+        -webkit-background-clip: text;
+    }
+    .rotate {
+        transition: transform 0.3s;
+    }
+    .rotate-up {
+        transform: rotate(180deg);
+    }
+
+    .gradient-text-green {
+        @apply bg-gradient-to-t from-green-700 to-green-400;
+        background-clip: text;
+        color: rgba(0, 0, 0, 0);
+        -webkit-background-clip: text;
+    }
+    .gradient-text-blue {
+        @apply bg-gradient-to-t from-blue-700 to-blue-400;
+        background-clip: text;
+        color: rgba(0, 0, 0, 0);
+        -webkit-background-clip: text;
+    }
+
+    .brand-orange {
+        @apply bg-gradient-to-r from-orange-500 to-orange-700;
+        background-clip: text;
+        color: rgba(0, 0, 0, 0);
+        -webkit-background-clip: text;
+    }
+    .hide-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    .script-image {
+        height: 200px;
+        object-fit: cover;
+    }
+    .uniform-tag {
+        width: 100px; /* or any other value */
+        height: 30px; /* or any other value */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+@layer utilities {
+    .clip-triangle {
+        clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    }
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
+}
+.custom-background {
+    background-size: cover;
+    background-position: center;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .custom-background {
+        background-size: contain; /* Show the whole image */
+        background-position: top center; /* Adjust based on the most important part of your image */
+        background-repeat: no-repeat;
+    }
+}
