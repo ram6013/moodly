@@ -17,8 +17,8 @@ function QuienesSomos() {
       <div className="grid grid-cols-3 gap-8 justify-items-center">
         <Nostros 
           nombre="Alberto Ruiz" 
-          oficioEsp="CEO" 
-          oficioEng="CEO" 
+          oficioEsp="CFO" 
+          oficioEng="CFO" 
           src="/alberto.jpg" 
           linkedin="https://www.linkedin.com/in/alberto-ruiz-697941164/" 
         />
@@ -31,8 +31,8 @@ function QuienesSomos() {
         />
         <Nostros 
           nombre="Pablo Lliso" 
-          oficioEsp="Becario" 
-          oficioEng="Intern" 
+          oficioEsp="CEO" 
+          oficioEng="CEO" 
           src="/pablo.jpg" 
           linkedin="https://www.linkedin.com/in/pablo-lliso-203847315/" 
         />
