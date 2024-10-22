@@ -11,8 +11,6 @@ export default async function Contact({
 }) {
     const session = (await auth()) as ISession;
     console.log(session);
-    if (!session.user) {
-        return <div>Not authorized</div>;
-    }
-    return <ContactPage lng={lng} user={session.user}></ContactPage>;
+
+    return <ContactPage lng={lng} user={session?.user}></ContactPage>;
 }

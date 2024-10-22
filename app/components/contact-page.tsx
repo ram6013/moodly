@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import { sendEmail } from "../[lng]/contact/actions";
 import { useTranslation } from "../i18n/client";
 
-function ContactPage({ lng, user }: { lng: string; user: IUser }) {
+function ContactPage({ lng, user }: { lng: string; user?: IUser }) {
     const { t } = useTranslation(lng);
     const [msg, setMsg] = useState("");
     return (
@@ -27,6 +27,11 @@ function ContactPage({ lng, user }: { lng: string; user: IUser }) {
                         onClick={() => {
                             if (msg === "" || msg.length < 1) {
                                 return toast.error("Please enter a message");
+                            }
+                            if (!user) {
+                                return toast.error(
+                                    "Please sign in to send a message"
+                                );
                             }
                             sendEmail(user.email!, user.name!, msg);
                         }}
