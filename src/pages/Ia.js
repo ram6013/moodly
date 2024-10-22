@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import Header from "../Componentes/Header";
 import CameraComponent from "../Componentes/CamaraComponent";
+import Popup from "../Componentes/PopUp"; // Importar el componente Popup
 
 function Ia() {
   const [detectedEmotions, setDetectedEmotions] = useState([]);
-  const [isCameraEnabled, setIsCameraEnabled] = useState(true); // State to manage camera visibility
+  const [isCameraEnabled, setIsCameraEnabled] = useState(false); // Estado para gestionar la visibilidad de la cámara
+  const [isPopupVisible, setIsPopupVisible] = useState(true); // Estado para controlar la visibilidad del popup
 
   const handleEmotionsDetected = (emotions) => {
     const filteredEmotions = emotions.filter(emotion => emotion.score > 0.6);
@@ -34,9 +36,13 @@ function Ia() {
 
   const averageScores = calculateAverageScores();
 
-  // Function to toggle the camera visibility
+  // Función para alternar la visibilidad de la cámara
   const toggleCamera = () => {
     setIsCameraEnabled((prev) => !prev);
+  };
+
+  const handleClosePopup = () => {
+    setIsPopupVisible(false); // Cerrar el popup
   };
 
   return (
@@ -48,21 +54,11 @@ function Ia() {
         {isCameraEnabled && (
           <CameraComponent 
             onEmotionsDetected={handleEmotionsDetected} 
-            isCameraEnabled={isCameraEnabled} // Pass the camera state
+            isCameraEnabled={isCameraEnabled} // Pasar el estado de la cámara
           />
         )}
 
-        {/* <div className="mt-4 text-white ml-8" style={{ maxHeight: '480px', overflowY: 'auto', width: '300px' }}>
-          <h2 className="text-2xl mb-2">Emociones Detectadas:</h2>
-          <ul className="space-y-2">
-            {detectedEmotions.map((emotion, index) => (
-              <li key={index}>
-                {emotion.name} - {emotion.score.toFixed(2)}
-              </li>
-            ))}
-          </ul>
-        </div> */}
-
+        {/* Mostrando la media de emociones */}
         <div className="mt-4 text-white ml-8">
           <h2 className="text-2xl mb-2">Media de Emociones:</h2>
           <ul className="space-y-2">
@@ -81,6 +77,8 @@ function Ia() {
       >
         {isCameraEnabled ? "Quitar Cámara" : "Activar Cámara"}
       </button>
+
+      {isPopupVisible && <Popup onClose={handleClosePopup} />} {/* Mostrar el popup si es visible */}
     </div>
   );
 }
