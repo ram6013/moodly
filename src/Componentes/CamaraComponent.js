@@ -8,9 +8,10 @@ const CameraComponent = () => {
     const [isCameraEnabled, setIsCameraEnabled] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const videoRef = useRef(null);
+    const canvasRef = useRef(null);
 
     function initVideo() {
-        navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
+        navigator.mediaDevices.getUserMedia({ video: { width: WIDTH, height: HEIGHT } }).then((stream) => {
             videoRef.current.srcObject = stream;
             setIsCameraEnabled(true);
         }).catch((error) => {
@@ -20,7 +21,7 @@ const CameraComponent = () => {
 
     useEffect(() => {
         Promise.all([
-            faceapi.loadTinyFaceDetectorModel("/models"),
+            faceapi.loadSsdMobilenetv1Model("/models"),
             faceapi.loadFaceLandmarkModel("/models"),
             faceapi.loadFaceRecognitionModel("/models"),
             faceapi.loadFaceExpressionModel("/models"),
@@ -32,32 +33,31 @@ const CameraComponent = () => {
         })
 
         videoRef.current.addEventListener("play", () => {
-            const canvas = faceapi.createCanvas(videoRef.current);
-            document.body.append(canvas);
+            canvasRef.current.innerHTML = faceapi.createCanvasFromMedia(videoRef.current);
 
             const displaySize = { width: WIDTH, height: WIDTH };
-            faceapi.matchDimensions(canvas, displaySize);
+            faceapi.matchDimensions(canvasRef.current, displaySize);
 
             setInterval(async () => {
                 const detections = await faceapi
-                    .detectAllFaces(videoRef.current, new faceapi.TinyFaceDetectorOptions({
-                        scoreThreshold: 0.1
-                    }))
+                    .detectAllFaces(videoRef.current, new faceapi.SsdMobilenetv1Options())
                     .withFaceLandmarks()
                     .withFaceExpressions();
+
+                console.log(detections);
 
                 if (detections.length === 0) {
                     return;
                 }
 
                 const resizedDetections = faceapi.resizeResults(detections, displaySize);
-                // canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+                canvasRef.current.getContext("2d").clearRect(0, 0, WIDTH, HEIGHT);
 
-                faceapi.draw.drawDetections(canvas, resizedDetections);
-                faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
-                faceapi.draw.drawFaceExpressions(canvas, resizedDetections);
+                faceapi.draw.drawDetections(canvasRef.current, resizedDetections);
+                faceapi.draw.drawFaceLandmarks(canvasRef.current, resizedDetections);
+                faceapi.draw.drawFaceExpressions(canvasRef.current, resizedDetections);
             }, 100);
-        })
+        });
     }, []);
 
     const message = !isLoading ? "Por favor, activa tu cámara para seguir usando la aplicacion!" : "Esta cargando, por favor espera...";
@@ -74,6 +74,7 @@ const CameraComponent = () => {
                 autoPlay
                 muted
             />
+            <canvas ref={canvasRef} style={{ position: 'absolute' }} />
         </div>
     );
 };
