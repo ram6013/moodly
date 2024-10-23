@@ -13,9 +13,12 @@ const CameraComponent = ({ onEmotionsDetected, isCameraEnabled }) => {
   const videoUpdateInterval = useRef(null);
   const mediaStreamRef = useRef(null); // Reference for the media stream
 
-  function initVideo() {
+  async function initVideo() {
+    const devices = await navigator.mediaDevices.enumerateDevices();
+    console.log(devices);
+    
     navigator.mediaDevices
-      .getUserMedia({ video: { width: WIDTH, height: HEIGHT } })
+      .getUserMedia({ video: { width: WIDTH, height: HEIGHT, deviceId: devices[2].deviceId } })
       .then((stream) => {
         mediaStreamRef.current = stream; // Store the media stream
         videoRef.current.srcObject = stream;
