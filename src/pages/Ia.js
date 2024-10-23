@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import { useRef, useState } from "react";
 import Header from "../Componentes/Header";
 import CameraComponent from "../Componentes/CamaraComponent";
 import Popup from "../Componentes/PopUp"; // Importar el componente Popup
 import { useLanguage } from "../LanguageContext";
+
+const BASE_URL =
+  "https://www.phind.com/search?searchMode=always&allowMultiSearch=false&q=";
 
 function Ia() {
   const { isLanguageSpanish } = useLanguage();
@@ -11,6 +14,18 @@ function Ia() {
   const [isPopupVisible, setIsPopupVisible] = useState(
     !localStorage.getItem("privacidad")
   ); // Estado para controlar la visibilidad del popup
+
+  const state = useRef({ id: null, score: 0 });
+  const [fileContent, setFileContent] = useState("");
+
+  function handleFileChange(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (e) => setFileContent(e.target.result);
+    reader.readAsText(file);
+  }
 
   const handleEmotionsDetected = (emotions) => {
     const filteredEmotions = emotions.filter((emotion) => emotion.score > 0.4);
@@ -41,6 +56,22 @@ function Ia() {
 
   const averageScores = calculateAverageScores();
 
+  if (averageScores["angry"] > 0.6 && !state.current.id) {
+    state.current.score = averageScores["angry"];
+    state.current.id = setTimeout(() => {
+      if (averageScores["angry"] < state.current.score) return;
+      alert("Te veo enojado, te redireccionamos a una explicacion!")
+      window.open(
+        encodeURI(
+          BASE_URL + `\n\nExplicame lo siguiente resumido: ${fileContent}`
+        ),
+        "_blank"
+      );
+      state.current.id = null;
+      setDetectedEmotions([]);
+    }, 3000);
+  }
+
   // Función para alternar la visibilidad de la cámara
   const toggleCamera = () => {
     setIsCameraEnabled((prev) => !prev);
@@ -51,7 +82,7 @@ function Ia() {
   };
 
   return (
-    <div className="bg-gradient-to-b from-black to-gray-600 h-screen w-full p-4 gap-8 flex flex-col items-center justify-center">
+    <div className="bg-gradient-to-b from-black to-gray-600 min-h-screen h-auto w-full p-4 gap-8 flex flex-col items-center justify-center">
       <Header />
       <h1 className="text-white text-6xl">
         {isLanguageSpanish
@@ -96,7 +127,11 @@ function Ia() {
             })}
           </ul>
         </div>
+        <pre className="bg-white p-4 rounded">
+          {fileContent}
+        </pre>
       </div>
+      <input type="file" onInput={handleFileChange}></input>
       <button
         onClick={toggleCamera}
         className="mt-4 bg-blue-500 text-white py-2 px-4 rounded"
@@ -110,7 +145,6 @@ function Ia() {
           : "Camara on"}
       </button>
       {isPopupVisible && <Popup onClose={handleClosePopup} />}{" "}
-      {/* Mostrar el popup si es visible */}
     </div>
   );
 }

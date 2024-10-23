@@ -26,9 +26,7 @@ const CameraComponent = ({ onEmotionsDetected, isCameraEnabled }) => {
   }
 
   function onPlayVideo() {
-    canvasRef.current.innerHTML = faceapi.createCanvasFromMedia(
-      videoRef.current
-    );
+    canvasRef.current.innerHTML = faceapi.createCanvasFromMedia(videoRef.current);
     const displaySize = { width: WIDTH, height: HEIGHT };
     faceapi.matchDimensions(canvasRef.current, displaySize);
 

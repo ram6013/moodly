@@ -7,6 +7,8 @@ import Contacto from './pages/Contacto';
 import Ia from './pages/Ia';
 import PoliticaPrivacidad from './pages/PoliticaPrivacidad';
 import PoliticaCookies from './pages/PoliticaCookies';
+import Camara from './pages/Camara';
+import Class from './pages/Class';
 
 function App() {
   return (
@@ -16,9 +18,11 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/QuienesSomos" element={<QuienesSomos />} />
           <Route path='/Contacto' element={<Contacto/>}/>
-          <Route path='/IA' element={<Ia/>}/>
+          <Route path='/User' element={<Ia/>}/>
           <Route path='/PoliticaPrivacidad' element={<PoliticaPrivacidad/>}/>
           <Route path='/PoliticaCookies' element={<PoliticaCookies/>}/>
+          <Route path='Camara' element={<Camara/>}/>
+          <Route path='Class' element={<Class/>}></Route>
           </Routes>
       </Router>
     </LanguageProvider>

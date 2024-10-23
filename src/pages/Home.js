@@ -23,7 +23,7 @@ function Home() {
         className="aspect-square w-[15%] mx-auto"
         alt="Class"
       />
-      <button onClick={()=>handleNavigate("IA")} className="bg-white p-5 mt-10 w-[30%] rounded-full shadow-lg font-mochiy hover:bg-gray-300">{isLanguageSpanish? "Pruebalo!" : "Try it!"}</button>
+      <button onClick={()=>handleNavigate("Camara")} className="bg-white p-5 mt-10 w-[30%] rounded-full shadow-lg font-mochiy hover:bg-gray-300">{isLanguageSpanish? "Pruebalo!" : "Try it!"}</button>
       <div className=" w-full">
         <Footer></Footer>
       </div>
