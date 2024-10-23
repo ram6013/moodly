@@ -6,9 +6,11 @@ const HEIGHT = 480;
 
 const CameraComponent = ({ onEmotionsDetected, isCameraEnabled }) => {
   const [isLoading, setIsLoading] = useState(true);
+
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
-  const ref = useRef(null);
+
+  const videoUpdateInterval = useRef(null);
   const mediaStreamRef = useRef(null); // Reference for the media stream
 
   function initVideo() {
@@ -23,6 +25,50 @@ const CameraComponent = ({ onEmotionsDetected, isCameraEnabled }) => {
       });
   }
 
+  function onPlayVideo() {
+    canvasRef.current.innerHTML = faceapi.createCanvasFromMedia(
+      videoRef.current
+    );
+    const displaySize = { width: WIDTH, height: HEIGHT };
+    faceapi.matchDimensions(canvasRef.current, displaySize);
+
+    videoUpdateInterval.current = setInterval(async () => {
+      if (!videoUpdateInterval.current || !videoRef.current) return;
+
+      const detections = await faceapi
+        .detectAllFaces(videoRef.current, new faceapi.SsdMobilenetv1Options())
+        .withFaceLandmarks()
+        .withFaceExpressions()
+        .withFaceDescriptors();
+
+      if (detections.length === 0) {
+        return;
+      }
+
+      const newEmotions = detections.reduce((acc, { expressions: exp }) => {
+        Object.keys(exp).forEach((name) => acc.push({ name, score: exp[name] }));
+        return acc;
+      }, []);
+
+      // Pass the new emotions to the parent component
+      onEmotionsDetected(newEmotions);
+
+      const resizedDetections = faceapi.resizeResults(detections, displaySize);
+
+      // Verificar si el canvas y su contexto están disponibles antes de manipularlos
+      const canvas = canvasRef.current;
+      if (canvas) {
+        const context = canvas.getContext("2d");
+        if (context) {
+          context.clearRect(0, 0, canvas.width, canvas.height);
+          faceapi.draw.drawDetections(canvas, resizedDetections);
+          faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
+          faceapi.draw.drawFaceExpressions(canvas, resizedDetections);
+        }
+      }
+    }, 100);
+  }
+
   useEffect(() => {
     if (isCameraEnabled) {
       Promise.all([
@@ -35,61 +81,14 @@ const CameraComponent = ({ onEmotionsDetected, isCameraEnabled }) => {
           setIsLoading(false);
           initVideo(); // Initialize video only if camera is enabled
         })
-        .catch((error) => {
-          console.error("Error al cargar los modelos:", error);
-        });
-
-      videoRef.current.addEventListener("play", () => {
-        canvasRef.current.innerHTML = faceapi.createCanvasFromMedia(videoRef.current);
-        const displaySize = { width: WIDTH, height: HEIGHT };
-        faceapi.matchDimensions(canvasRef.current, displaySize);
-
-        ref.current = setInterval(async () => {
-          if (!ref.current || !videoRef.current) return;
-          const detections = await faceapi
-            .detectAllFaces(videoRef.current, new faceapi.SsdMobilenetv1Options())
-            .withFaceLandmarks()
-            .withFaceExpressions();
-
-          if (detections.length === 0) {
-            return;
-          }
-
-          const newEmotions = [];
-          for (const detection of detections) {
-            for (const emotion of Object.keys(detection.expressions)) {
-              const score = detection.expressions[emotion];
-              if (score > 0) {
-                newEmotions.push({ name: emotion, score });
-              }
-            }
-          }
-
-          // Pass the new emotions to the parent component
-          onEmotionsDetected(newEmotions);
-
-          const resizedDetections = faceapi.resizeResults(detections, displaySize);
-          
-          // Verificar si el canvas y su contexto están disponibles antes de manipularlos
-          const canvas = canvasRef.current;
-          if (canvas) {
-            const context = canvas.getContext("2d");
-            if (context) {
-              context.clearRect(0, 0, canvas.width, canvas.height);
-              faceapi.draw.drawDetections(canvas, resizedDetections);
-              faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
-              faceapi.draw.drawFaceExpressions(canvas, resizedDetections);
-            }
-          }
-        }, 100);
-      });
+        .catch((error) => console.error("Error al cargar los modelos:", error));
     }
 
     return () => {
-      clearInterval(ref.current);
+      clearInterval(videoUpdateInterval.current);
       if (mediaStreamRef.current) {
         const tracks = mediaStreamRef.current.getTracks();
-        tracks.forEach(track => track.stop()); // Stop all tracks in the media stream
+        tracks.forEach((track) => track.stop()); // Stop all tracks in the media stream
       }
     };
   }, [isCameraEnabled]); // Run effect when camera state changes
@@ -112,6 +111,7 @@ const CameraComponent = ({ onEmotionsDetected, isCameraEnabled }) => {
         height={HEIGHT}
         hidden={!isCameraEnabled || isLoading}
         className="border-2 border-white object-cover"
+        onPlay={onPlayVideo}
         autoPlay
         muted
       />

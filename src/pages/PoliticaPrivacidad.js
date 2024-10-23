@@ -132,7 +132,7 @@ const englishText = `
 function PoliticaPrivacidad(){
     const { isLanguageSpanish } = useLanguage();
     return(
-        <div className="bg-gradient-to-b from-black to-gray-600 h-full relative w-full p-4 gap-8 flex flex-col items-center justify-center">
+        <div className="bg-gradient-to-b from-black to-gray-600 h-full min-h-screen relative w-full p-4 gap-8 flex flex-col items-center justify-center">
             <Header></Header>
             <div className="flex justify-center max-w-[60%] max-h-[80vh] overflow-y-scroll overflow-hidden p-4"> 
                 <h1

@@ -9,7 +9,7 @@ function QuienesSomos() {
   const { isLanguageSpanish } = useLanguage();
 
   return (
-    <div className="bg-gradient-to-b from-black to-gray-600 w-auto h-full relative">
+    <div className="bg-gradient-to-b from-black to-gray-600 w-auto h-full min-h-screen relative">
       <Header />
       <div className="flex justify-center p-4">
         <h1 className="text-white text-4xl font-mochiy">{isLanguageSpanish ? "¿Quienes somos nosotros?" : "Who are we?"}</h1>

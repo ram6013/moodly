@@ -1,10 +1,7 @@
-import React, { useState } from "react";
-
 function Popup({ onClose }) {
-  const [hasRead, setHasRead] = useState(false);
 
   const handleAccept = () => {
-    setHasRead(true);
+    localStorage.setItem("privacidad", true);
     onClose(); // Close the popup when the button is clicked
   };
 
